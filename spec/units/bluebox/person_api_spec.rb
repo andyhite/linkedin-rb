@@ -11,39 +11,73 @@ describe Bluebox::PersonAPI do
       @client.stub(:access_token) { @access_token }
     end
     
+    describe "#get_me" do
+      it "should request the currently authenticated person" do
+        @client.should_receive(:get_person).with("~")
+        @client.get_me
+      end
+    end
+    
     describe "#get_person" do
       context "without explicit fields" do
         it "should request all the fields" do
-          @client.should_receive(:get).with("people/~", Bluebox::PersonAPI::FIELDS)
-          @client.get_person(:path => '~')
+          @client.should_receive(:get_object).with("people", "~", Bluebox::PersonAPI::FIELDS, {})
+          @client.get_person("~")
         end
       end
       
       context "with explicit fields" do
         it "should request only the requested fields" do
-          @client.should_receive(:get).with("people/~", ['first-name'])
-          @client.get_person(:path => '~', :fields => ['first-name'])
+          @client.should_receive(:get_object).with("people", "~", ['id'], {})
+          @client.get_person('~', :fields => ['id'])
+        end
+      end
+    end
+    
+    describe "#get_person_connections" do
+      context "without explicit fields" do
+        it "should request all the fields" do
+          @client.should_receive(:get_collection).with("people", "~", "connections", Bluebox::PersonAPI::FIELDS, {})
+          @client.get_person_connections("~")
         end
       end
       
-      context "by path" do
-        it "should make a GET request to people/ with a path string" do
-          @client.should_receive(:get).with("people/~", Bluebox::PersonAPI::FIELDS)
-          @client.get_person(:path => '~')
+      context "with explicit fields" do
+        it "should request only the requested fields" do
+          @client.should_receive(:get_collection).with("people", "~", "connections", ['id'], {})
+          @client.get_person_connections('~', :fields => ['id'])
         end
       end
+    end
     
-      context "by ID" do
-        it "should make a GET request to people/ with an ID parameter" do
-          @client.should_receive(:get).with("people/id=1234", Bluebox::PersonAPI::FIELDS)
-          @client.get_person(:id => 1234)
+    describe "#get_person_memberships" do
+      context "without explicit fields" do
+        it "should request all the fields" do
+          @client.should_receive(:get_collection).with("people", "~", "group-memberships", Bluebox::PersonAPI::MEMBERSHIP_FIELDS, {})
+          @client.get_person_memberships("~")
         end
       end
+      
+      context "with explicit fields" do
+        it "should request only the requested fields" do
+          @client.should_receive(:get_collection).with("people", "~", "group-memberships", ['id'], {})
+          @client.get_person_memberships('~', :fields => ['id'])
+        end
+      end
+    end
     
-      context "by URL" do
-        it "should make a GET request to people/with a URL parameter" do
-          @client.should_receive(:get).with("people/url=http%3A%2F%2Fgoogle.com", Bluebox::PersonAPI::FIELDS)
-          @client.get_person(:url => 'http://google.com')
+    describe "#get_person_suggestions" do
+      context "without explicit fields" do
+        it "should request all the fields" do
+          @client.should_receive(:get_collection).with("people", "~", "suggestions/groups", Bluebox::PersonAPI::SUGGESTION_FIELDS, {})
+          @client.get_person_suggestions("~")
+        end
+      end
+      
+      context "with explicit fields" do
+        it "should request only the requested fields" do
+          @client.should_receive(:get_collection).with("people", "~", "suggestions/groups", ['id'], {})
+          @client.get_person_suggestions('~', :fields => ['id'])
         end
       end
     end
