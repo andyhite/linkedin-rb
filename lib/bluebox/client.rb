@@ -1,5 +1,11 @@
+require 'bluebox/request'
+require 'bluebox/api'
+
 module Bluebox
   class Client
+    include Bluebox::Request
+    include Bluebox::API
+    
     attr_accessor :oauth_token, :oauth_secret
     
     def initialize(options={})
@@ -15,11 +21,8 @@ module Bluebox
       OAuth::AccessToken.new(consumer, oauth_token, oauth_secret)
     end
     
-    def get(path)
-      access_token.get("#{base_uri}/#{path}")
-    end
-    
   private
+    
     def consumer_key
       Bluebox.consumer_key
     end

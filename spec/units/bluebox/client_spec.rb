@@ -44,15 +44,6 @@ describe Bluebox::Client do
           @client.access_token
         end
       end
-      
-      describe "#get" do
-        it "should make a GET request on the access token" do
-          @access_token = double('access token')
-          @client.stub(:access_token) { @access_token }
-          @client.access_token.should_receive(:get).with('http://api.linkedin.com/v1/people/~')
-          @client.get('people/~')
-        end
-      end
     end
   end
 end
