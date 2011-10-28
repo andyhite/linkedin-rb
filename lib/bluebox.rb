@@ -1,5 +1,5 @@
 require 'active_support/all'
-require 'bluebox/hash'
+require 'bluebox/string'
 require 'bluebox/configuration'
 require 'bluebox/client'
 

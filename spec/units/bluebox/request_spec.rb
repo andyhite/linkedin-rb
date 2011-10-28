@@ -15,7 +15,7 @@ describe Bluebox::Request do
       before do
         @response = mock('response')
         @response.stub(:code)
-        @response.stub(:body)
+        @response.stub(:body) { { 'test' => 'value' }.to_json }
         @access_token.stub(:get) { @response }
       end
       

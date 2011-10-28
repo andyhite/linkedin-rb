@@ -17,22 +17,12 @@ describe Bluebox::Response do
     end
     
     it "should set the body" do
-      @response.body.should == @body
-    end
-    
-    context "#parsed_body" do      
-      it "should return the body as a hash" do
-        @response.parsed_body.should == {"key_one" => "value"}
-      end
-      
-      it "should underscore the keys of the returned hash" do
-        @response.parsed_body.should have_key("key_one")
-      end
+      @response.body.should == @body.from_json
     end
     
     context "#[]" do
       it "should return the value for a key in #parsed_body" do
-        @response['key_one'].should == 'value'
+        @response['keyOne'].should == 'value'
       end
     end
   end
