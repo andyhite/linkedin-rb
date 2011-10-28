@@ -12,6 +12,9 @@ rescue LoadError
   RDoc::Task = Rake::RDocTask
 end
 
+require 'rspec/core/rake_task'
+RSpec::Core::RakeTask.new('spec')
+
 RDoc::Task.new(:rdoc) do |rdoc|
   rdoc.rdoc_dir = 'rdoc'
   rdoc.title    = 'Bluebox'
@@ -19,8 +22,6 @@ RDoc::Task.new(:rdoc) do |rdoc|
   rdoc.rdoc_files.include('README.rdoc')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
-
-
 
 Bundler::GemHelper.install_tasks
 

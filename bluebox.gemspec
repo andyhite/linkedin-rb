@@ -7,15 +7,14 @@ require "bluebox/version"
 Gem::Specification.new do |s|
   s.name        = "bluebox"
   s.version     = Bluebox::VERSION
-  s.authors     = ["TODO: Your name"]
-  s.email       = ["TODO: Your email"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of Bluebox."
-  s.description = "TODO: Description of Bluebox."
+  s.authors     = ["Andrew Hite"]
+  s.email       = ["andrew@andrew-hite.com"]
+  s.homepage    = "http://andrew-hite.com"
+  s.summary     = "A wrapper for the LinkedIn API"
+  s.description = "A wrapper for the LinkedIn API"
 
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
+  s.test_files = Dir.glob("spec/**/*.rb")
 
-  s.add_dependency "rails", "~> 3.1.1"
-
-  s.add_development_dependency "sqlite3"
+  s.add_development_dependency 'rspec', '~> 2.6'
 end
