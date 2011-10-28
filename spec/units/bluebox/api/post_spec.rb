@@ -1,6 +1,6 @@
-require_relative '../../spec_helper'
+require_relative '../../../spec_helper'
 
-describe Bluebox::CompanyAPI do
+describe Bluebox::API::Post do
   describe "with an initialized client" do
     before do
       @client = Bluebox::Client.new({
@@ -11,34 +11,34 @@ describe Bluebox::CompanyAPI do
       @client.stub(:access_token) { @access_token }
     end
     
-    describe "#get_company" do
+    describe "#get_post" do
       context "without explicit fields" do
         it "should request all the fields" do
-          @client.should_receive(:get_object).with("companies", "~", Bluebox::CompanyAPI::FIELDS[:company], {})
-          @client.get_company("~")
+          @client.should_receive(:get_object).with("posts", "~", Bluebox::API::Post::FIELDS[:post], {})
+          @client.get_post("~")
         end
       end
       
       context "with explicit fields" do
         it "should request only the requested fields" do
-          @client.should_receive(:get_object).with("companies", "~", ['id'], {})
-          @client.get_company('~', :fields => ['id'])
+          @client.should_receive(:get_object).with("posts", "~", ['id'], {})
+          @client.get_post('~', :fields => ['id'])
         end
       end
     end
     
-    describe "#get_companies" do
+    describe "#get_posts" do
       context "without explicit fields" do
         it "should request all the fields" do
-          @client.should_receive(:get_objects).with("companies", ['1', '2', '3'], Bluebox::CompanyAPI::FIELDS[:company], {})
-          @client.get_companies(['1', '2', '3'])
+          @client.should_receive(:get_objects).with("posts", ['1', '2', '3'], Bluebox::API::Post::FIELDS[:post], {})
+          @client.get_posts(['1', '2', '3'])
         end
       end
       
       context "with explicit fields" do
         it "should request only the requested fields" do
-          @client.should_receive(:get_objects).with("companies", ['1', '2', '3'], ['id'], {})
-          @client.get_companies(['1', '2', '3'], :fields => ['id'])
+          @client.should_receive(:get_objects).with("posts", ['1', '2', '3'], ['id'], {})
+          @client.get_posts(['1', '2', '3'], :fields => ['id'])
         end
       end
     end

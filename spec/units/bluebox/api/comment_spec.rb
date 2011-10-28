@@ -1,6 +1,6 @@
-require_relative '../../spec_helper'
+require_relative '../../../spec_helper'
 
-describe Bluebox::CommentAPI do
+describe Bluebox::API::Comment do
   describe "with an initialized client" do
     before do
       @client = Bluebox::Client.new({
@@ -14,7 +14,7 @@ describe Bluebox::CommentAPI do
     describe "#get_comment" do
       context "without explicit fields" do
         it "should request all the fields" do
-          @client.should_receive(:get_object).with("comments", "~", Bluebox::CommentAPI::FIELDS[:comment], {})
+          @client.should_receive(:get_object).with("comments", "~", Bluebox::API::Comment::FIELDS[:comment], {})
           @client.get_comment("~")
         end
       end
@@ -30,7 +30,7 @@ describe Bluebox::CommentAPI do
     describe "#get_comments" do
       context "without explicit fields" do
         it "should request all the fields" do
-          @client.should_receive(:get_objects).with("comments", ['1', '2', '3'], Bluebox::CommentAPI::FIELDS[:comment], {})
+          @client.should_receive(:get_objects).with("comments", ['1', '2', '3'], Bluebox::API::Comment::FIELDS[:comment], {})
           @client.get_comments(['1', '2', '3'])
         end
       end

@@ -1,16 +1,16 @@
-require 'bluebox/person_api'
-require 'bluebox/group_api'
-require 'bluebox/post_api'
-require 'bluebox/comment_api'
-require 'bluebox/company_api'
+require 'bluebox/api/person'
+require 'bluebox/api/group'
+require 'bluebox/api/post'
+require 'bluebox/api/comment'
+require 'bluebox/api/company'
 
 module Bluebox
   module API
-    include Bluebox::PersonAPI
-    include Bluebox::GroupAPI
-    include Bluebox::PostAPI
-    include Bluebox::CommentAPI
-    include Bluebox::CompanyAPI
+    include Bluebox::API::Person
+    include Bluebox::API::Group
+    include Bluebox::API::Post
+    include Bluebox::API::Comment
+    include Bluebox::API::Company
     
     def get(path, fields, options={})
       options = { :format => 'json' }.merge(options)

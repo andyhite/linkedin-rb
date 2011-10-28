@@ -1,6 +1,6 @@
-require_relative '../../spec_helper'
+require_relative '../../../spec_helper'
 
-describe Bluebox::PersonAPI do
+describe Bluebox::API::Person do
   describe "with an initialized client" do
     before do
       @client = Bluebox::Client.new({
@@ -21,7 +21,7 @@ describe Bluebox::PersonAPI do
     describe "#get_person" do
       context "without explicit fields" do
         it "should request all the fields" do
-          @client.should_receive(:get_object).with("people", "~", Bluebox::PersonAPI::FIELDS[:person], {})
+          @client.should_receive(:get_object).with("people", "~", Bluebox::API::Person::FIELDS[:person], {})
           @client.get_person("~")
         end
       end
@@ -37,7 +37,7 @@ describe Bluebox::PersonAPI do
     describe "#get_person_connections" do
       context "without explicit fields" do
         it "should request all the fields" do
-          @client.should_receive(:get_collection).with("people", "~", "connections", Bluebox::PersonAPI::FIELDS[:person], {})
+          @client.should_receive(:get_collection).with("people", "~", "connections", Bluebox::API::Person::FIELDS[:person], {})
           @client.get_person_connections("~")
         end
       end
@@ -53,7 +53,7 @@ describe Bluebox::PersonAPI do
     describe "#get_person_memberships" do
       context "without explicit fields" do
         it "should request all the fields" do
-          @client.should_receive(:get_collection).with("people", "~", "group-memberships", Bluebox::PersonAPI::FIELDS[:membership], {})
+          @client.should_receive(:get_collection).with("people", "~", "group-memberships", Bluebox::API::Person::FIELDS[:membership], {})
           @client.get_person_memberships("~")
         end
       end
@@ -69,7 +69,7 @@ describe Bluebox::PersonAPI do
     describe "#get_person_suggestions" do
       context "without explicit fields" do
         it "should request all the fields" do
-          @client.should_receive(:get_collection).with("people", "~", "suggestions/groups", Bluebox::PersonAPI::FIELDS[:suggestion], {})
+          @client.should_receive(:get_collection).with("people", "~", "suggestions/groups", Bluebox::API::Person::FIELDS[:suggestion], {})
           @client.get_person_suggestions("~")
         end
       end
@@ -85,7 +85,7 @@ describe Bluebox::PersonAPI do
     describe "#get_people" do
       context "without explicit fields" do
         it "should request all the fields" do
-          @client.should_receive(:get_objects).with("people", ['1', '2', '3'], Bluebox::PersonAPI::FIELDS[:person], {})
+          @client.should_receive(:get_objects).with("people", ['1', '2', '3'], Bluebox::API::Person::FIELDS[:person], {})
           @client.get_people(['1', '2', '3'])
         end
       end
