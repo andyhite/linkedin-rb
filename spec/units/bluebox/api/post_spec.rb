@@ -7,39 +7,20 @@ describe Bluebox::API::Post do
         :oauth_token => "oauth-token",
         :oauth_secret => "oauth-secret"
       })
-      @access_token = mock('access token')
-      @client.stub(:access_token) { @access_token }
+      @client.stub(:get) { Hash.new }
     end
     
     describe "#get_post" do
-      context "without explicit fields" do
-        it "should request all the fields" do
-          @client.should_receive(:get_object).with("posts", "~", Bluebox::API::Post::FIELDS[:post], {})
-          @client.get_post("~")
-        end
-      end
-      
-      context "with explicit fields" do
-        it "should request only the requested fields" do
-          @client.should_receive(:get_object).with("posts", "~", ['id'], {})
-          @client.get_post('~', :fields => ['id'])
-        end
+      it "should make a GET request on /posts/[params]" do
+        @client.should_receive(:get).with("posts/~", {})
+        @client.get_post("~")
       end
     end
     
     describe "#get_posts" do
-      context "without explicit fields" do
-        it "should request all the fields" do
-          @client.should_receive(:get_objects).with("posts", ['1', '2', '3'], Bluebox::API::Post::FIELDS[:post], {})
-          @client.get_posts(['1', '2', '3'])
-        end
-      end
-      
-      context "with explicit fields" do
-        it "should request only the requested fields" do
-          @client.should_receive(:get_objects).with("posts", ['1', '2', '3'], ['id'], {})
-          @client.get_posts(['1', '2', '3'], :fields => ['id'])
-        end
+      it "should make a GET request on /posts::[ids]" do
+        @client.should_receive(:get).with("posts::(1,2,3)", {})
+        @client.get_posts(['1', '2', '3'])
       end
     end
   end

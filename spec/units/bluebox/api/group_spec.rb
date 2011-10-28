@@ -7,55 +7,27 @@ describe Bluebox::API::Group do
         :oauth_token => "oauth-token",
         :oauth_secret => "oauth-secret"
       })
-      @access_token = mock('access token')
-      @client.stub(:access_token) { @access_token }
+      @client.stub(:get) { Hash.new }
     end
     
     describe "#get_group" do
-      context "without explicit fields" do
-        it "should request all the fields" do
-          @client.should_receive(:get_object).with("groups", "~", Bluebox::API::Group::FIELDS[:group], {})
-          @client.get_group("~")
-        end
-      end
-      
-      context "with explicit fields" do
-        it "should request only the requested fields" do
-          @client.should_receive(:get_object).with("groups", "~", ['id'], {})
-          @client.get_group('~', :fields => ['id'])
-        end
+      it "should make a GET request on /groups/[params]" do
+        @client.should_receive(:get).with("groups/~", {})
+        @client.get_group("~")
       end
     end
     
     describe "#get_group_posts" do
-      context "without explicit fields" do
-        it "should request all the fields" do
-          @client.should_receive(:get_collection).with("groups", "~", "posts", Bluebox::API::Group::FIELDS[:post], {})
-          @client.get_group_posts("~")
-        end
-      end
-      
-      context "with explicit fields" do
-        it "should request only the requested fields" do
-          @client.should_receive(:get_collection).with("groups", "~", "posts", ['id'], {})
-          @client.get_group_posts('~', :fields => ['id'])
-        end
+      it "should make a GET request on /groups/[params]/posts" do
+        @client.should_receive(:get).with("groups/~/posts", {})
+        @client.get_group_posts("~")
       end
     end
     
     describe "#get_groups" do
-      context "without explicit fields" do
-        it "should request all the fields" do
-          @client.should_receive(:get_objects).with("groups", ['1', '2', '3'], Bluebox::API::Group::FIELDS[:group], {})
-          @client.get_groups(['1', '2', '3'])
-        end
-      end
-      
-      context "with explicit fields" do
-        it "should request only the requested fields" do
-          @client.should_receive(:get_objects).with("groups", ['1', '2', '3'], ['id'], {})
-          @client.get_groups(['1', '2', '3'], :fields => ['id'])
-        end
+      it "should make a GET request on /groups::[ids]" do
+        @client.should_receive(:get).with("groups::(1,2,3)", {})
+        @client.get_groups(['1', '2', '3'])
       end
     end
   end

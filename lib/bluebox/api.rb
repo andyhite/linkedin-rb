@@ -12,23 +12,24 @@ module Bluebox
     include Bluebox::API::Comment
     include Bluebox::API::Company
     
-    def get(path, fields, options={})
-      options = { :format => 'json' }.merge(options)
-      request(:get, "#{base_uri}/#{path}:(#{fields.join(',')})?#{options.to_param}")
+    def get(path, options={})
+      options = { :format => 'json', :fields => nil }.merge(options)
+      fields = options.delete(:fields)
+      request(:get, "#{base_uri}/#{build_request(path, fields, options)}")
     end
     
-    def get_object(object, id_or_param, fields=[], options={})
+    def get_object(object, id_or_param, options={})
       query = parse_query(id_or_param)
-      get("#{object}/#{query}", fields, options)
+      get("#{object}/#{query}", options)
     end
     
-    def get_objects(object, ids, fields=[], options={})
-      get("#{object}::(#{ids.join(',')})", fields, options)['values']
+    def get_objects(object, ids, options={})
+      get("#{object}::(#{ids.join(',')})", options)['values']
     end
     
-    def get_collection(object, id_or_param, collection, fields=[], options={})
+    def get_collection(object, id_or_param, collection, options={})
       query = parse_query(id_or_param)
-      get("#{object}/#{query}/#{collection}", fields, options)['values']
+      get("#{object}/#{query}/#{collection}", options)['values']
     end
     
   private
@@ -36,8 +37,16 @@ module Bluebox
       id_or_param.is_a?(Hash) ? id_or_param.to_param : id_or_param
     end
     
-    def fields_from_options(options, defaults)
-      options.delete(:fields) || defaults
+    def fields_from_options(options)
+      options.delete(:fields) || nil
+    end
+    
+    def build_request(path, fields, options)
+      request = ""
+      request << "#{path}"
+      request << ":(#{fields.join(',')})" unless fields.blank?
+      request << "?#{options.to_param}" unless options.blank?
+      request
     end
   end
 end

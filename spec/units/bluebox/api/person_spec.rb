@@ -7,8 +7,7 @@ describe Bluebox::API::Person do
         :oauth_token => "oauth-token",
         :oauth_secret => "oauth-secret"
       })
-      @access_token = mock('access token')
-      @client.stub(:access_token) { @access_token }
+      @client.stub(:get) { Hash.new }
     end
     
     describe "#get_me" do
@@ -19,114 +18,51 @@ describe Bluebox::API::Person do
     end
     
     describe "#get_person" do
-      context "without explicit fields" do
-        it "should request all the fields" do
-          @client.should_receive(:get_object).with("people", "~", Bluebox::API::Person::FIELDS[:person], {})
-          @client.get_person("~")
-        end
-      end
-      
-      context "with explicit fields" do
-        it "should request only the requested fields" do
-          @client.should_receive(:get_object).with("people", "~", ['id'], {})
-          @client.get_person('~', :fields => ['id'])
-        end
+      it "should make a GET request on /people/[params]" do
+        @client.should_receive(:get).with("people/~", {})
+        @client.get_person('~')
       end
     end
     
     describe "#get_person_connections" do
-      context "without explicit fields" do
-        it "should request all the fields" do
-          @client.should_receive(:get_collection).with("people", "~", "connections", Bluebox::API::Person::FIELDS[:person], {})
-          @client.get_person_connections("~")
-        end
-      end
-      
-      context "with explicit fields" do
-        it "should request only the requested fields" do
-          @client.should_receive(:get_collection).with("people", "~", "connections", ['id'], {})
-          @client.get_person_connections('~', :fields => ['id'])
-        end
+      it "should make a GET request on /people/[params]/connections" do
+        @client.should_receive(:get).with("people/~/connections", {})
+        @client.get_person_connections("~")
       end
     end
     
     describe "#get_person_memberships" do
-      context "without explicit fields" do
-        it "should request all the fields" do
-          @client.should_receive(:get_collection).with("people", "~", "group-memberships", Bluebox::API::Person::FIELDS[:membership], {})
-          @client.get_person_memberships("~")
-        end
-      end
-      
-      context "with explicit fields" do
-        it "should request only the requested fields" do
-          @client.should_receive(:get_collection).with("people", "~", "group-memberships", ['id'], {})
-          @client.get_person_memberships('~', :fields => ['id'])
-        end
+      it "should make a GET request on /people/[params]/group-memberships" do
+        @client.should_receive(:get).with("people/~/group-memberships", {})
+        @client.get_person_memberships("~")
       end
     end
     
     describe "#get_person_suggestions" do
-      context "without explicit fields" do
-        it "should request all the fields" do
-          @client.should_receive(:get_collection).with("people", "~", "suggestions/groups", Bluebox::API::Person::FIELDS[:suggestion], {})
-          @client.get_person_suggestions("~")
-        end
-      end
-      
-      context "with explicit fields" do
-        it "should request only the requested fields" do
-          @client.should_receive(:get_collection).with("people", "~", "suggestions/groups", ['id'], {})
-          @client.get_person_suggestions('~', :fields => ['id'])
-        end
+      it "should make a GET request on /people/[params]/suggestions/groups" do
+        @client.should_receive(:get).with("people/~/suggestions/groups", {})
+        @client.get_person_suggestions("~")
       end
     end
     
     describe "#get_person_followed_companies" do
-      context "without explicit fields" do
-        it "should request all the fields" do
-          @client.should_receive(:get_collection).with("people", "~", "following/companies", Bluebox::API::Person::FIELDS[:company], {})
-          @client.get_person_followed_companies("~")
-        end
-      end
-      
-      context "with explicit fields" do
-        it "should request only the requested fields" do
-          @client.should_receive(:get_collection).with("people", "~", "following/companies", ['id'], {})
-          @client.get_person_followed_companies('~', :fields => ['id'])
-        end
+      it "should make a GET request on /people/[params]/following/companies" do
+        @client.should_receive(:get).with("people/~/following/companies", {})
+        @client.get_person_followed_companies("~")
       end
     end
     
     describe "#get_person_suggested_companies" do
-      context "without explicit fields" do
-        it "should request all the fields" do
-          @client.should_receive(:get_collection).with("people", "~", "suggestions/to-follow/companies", Bluebox::API::Person::FIELDS[:company], {})
-          @client.get_person_suggested_companies("~")
-        end
-      end
-      
-      context "with explicit fields" do
-        it "should request only the requested fields" do
-          @client.should_receive(:get_collection).with("people", "~", "suggestions/to-follow/companies", ['id'], {})
-          @client.get_person_suggested_companies('~', :fields => ['id'])
-        end
+      it "should make a GET request on /people/[params]/suggestions/to-follow/companies" do
+        @client.should_receive(:get).with("people/~/suggestions/to-follow/companies", {})
+        @client.get_person_suggested_companies("~")
       end
     end
     
     describe "#get_people" do
-      context "without explicit fields" do
-        it "should request all the fields" do
-          @client.should_receive(:get_objects).with("people", ['1', '2', '3'], Bluebox::API::Person::FIELDS[:person], {})
-          @client.get_people(['1', '2', '3'])
-        end
-      end
-      
-      context "with explicit fields" do
-        it "should request only the requested fields" do
-          @client.should_receive(:get_objects).with("people", ['1', '2', '3'], ['id'], {})
-          @client.get_people(['1', '2', '3'], :fields => ['id'])
-        end
+      it "should make a GET request on /people::[ids]" do
+        @client.should_receive(:get).with("people::(1,2,3)", {})
+        @client.get_people(['1', '2', '3'])
       end
     end
   end
