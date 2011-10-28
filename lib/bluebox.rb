@@ -1,0 +1,2 @@
+module Bluebox
+end
