@@ -17,4 +17,6 @@ Gem::Specification.new do |s|
   s.test_files = Dir.glob("spec/**/*.rb")
 
   s.add_development_dependency 'rspec', '~> 2.6'
+  s.add_dependency 'oauth', '~> 0.4.3'
+  s.add_dependency 'faraday', '~> 0.7.5'
 end
