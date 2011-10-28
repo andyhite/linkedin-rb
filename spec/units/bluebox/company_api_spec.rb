@@ -14,7 +14,7 @@ describe Bluebox::CompanyAPI do
     describe "#get_company" do
       context "without explicit fields" do
         it "should request all the fields" do
-          @client.should_receive(:get_object).with("companies", "~", Bluebox::CompanyAPI::FIELDS, {})
+          @client.should_receive(:get_object).with("companies", "~", Bluebox::CompanyAPI::FIELDS[:company], {})
           @client.get_company("~")
         end
       end

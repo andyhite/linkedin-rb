@@ -14,7 +14,7 @@ describe Bluebox::PostAPI do
     describe "#get_post" do
       context "without explicit fields" do
         it "should request all the fields" do
-          @client.should_receive(:get_object).with("posts", "~", Bluebox::PostAPI::FIELDS, {})
+          @client.should_receive(:get_object).with("posts", "~", Bluebox::PostAPI::FIELDS[:post], {})
           @client.get_post("~")
         end
       end

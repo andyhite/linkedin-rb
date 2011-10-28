@@ -14,7 +14,7 @@ describe Bluebox::GroupAPI do
     describe "#get_group" do
       context "without explicit fields" do
         it "should request all the fields" do
-          @client.should_receive(:get_object).with("groups", "~", Bluebox::GroupAPI::FIELDS, {})
+          @client.should_receive(:get_object).with("groups", "~", Bluebox::GroupAPI::FIELDS[:group], {})
           @client.get_group("~")
         end
       end
@@ -30,7 +30,7 @@ describe Bluebox::GroupAPI do
     describe "#get_group_posts" do
       context "without explicit fields" do
         it "should request all the fields" do
-          @client.should_receive(:get_collection).with("groups", "~", "posts", Bluebox::GroupAPI::FIELDS, {})
+          @client.should_receive(:get_collection).with("groups", "~", "posts", Bluebox::GroupAPI::FIELDS[:post], {})
           @client.get_group_posts("~")
         end
       end

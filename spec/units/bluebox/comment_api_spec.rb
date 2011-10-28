@@ -14,7 +14,7 @@ describe Bluebox::CommentAPI do
     describe "#get_comment" do
       context "without explicit fields" do
         it "should request all the fields" do
-          @client.should_receive(:get_object).with("comments", "~", Bluebox::CommentAPI::FIELDS, {})
+          @client.should_receive(:get_object).with("comments", "~", Bluebox::CommentAPI::FIELDS[:comment], {})
           @client.get_comment("~")
         end
       end

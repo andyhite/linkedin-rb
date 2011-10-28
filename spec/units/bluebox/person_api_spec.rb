@@ -13,7 +13,7 @@ describe Bluebox::PersonAPI do
     
     describe "#get_me" do
       it "should request the currently authenticated person" do
-        @client.should_receive(:get_person).with("~")
+        @client.should_receive(:get_person).with("~", {})
         @client.get_me
       end
     end
@@ -21,7 +21,7 @@ describe Bluebox::PersonAPI do
     describe "#get_person" do
       context "without explicit fields" do
         it "should request all the fields" do
-          @client.should_receive(:get_object).with("people", "~", Bluebox::PersonAPI::FIELDS, {})
+          @client.should_receive(:get_object).with("people", "~", Bluebox::PersonAPI::FIELDS[:person], {})
           @client.get_person("~")
         end
       end
@@ -37,7 +37,7 @@ describe Bluebox::PersonAPI do
     describe "#get_person_connections" do
       context "without explicit fields" do
         it "should request all the fields" do
-          @client.should_receive(:get_collection).with("people", "~", "connections", Bluebox::PersonAPI::FIELDS, {})
+          @client.should_receive(:get_collection).with("people", "~", "connections", Bluebox::PersonAPI::FIELDS[:person], {})
           @client.get_person_connections("~")
         end
       end
@@ -53,7 +53,7 @@ describe Bluebox::PersonAPI do
     describe "#get_person_memberships" do
       context "without explicit fields" do
         it "should request all the fields" do
-          @client.should_receive(:get_collection).with("people", "~", "group-memberships", Bluebox::PersonAPI::MEMBERSHIP_FIELDS, {})
+          @client.should_receive(:get_collection).with("people", "~", "group-memberships", Bluebox::PersonAPI::FIELDS[:membership], {})
           @client.get_person_memberships("~")
         end
       end
@@ -69,7 +69,7 @@ describe Bluebox::PersonAPI do
     describe "#get_person_suggestions" do
       context "without explicit fields" do
         it "should request all the fields" do
-          @client.should_receive(:get_collection).with("people", "~", "suggestions/groups", Bluebox::PersonAPI::SUGGESTION_FIELDS, {})
+          @client.should_receive(:get_collection).with("people", "~", "suggestions/groups", Bluebox::PersonAPI::FIELDS[:suggestion], {})
           @client.get_person_suggestions("~")
         end
       end
