@@ -82,6 +82,38 @@ describe Bluebox::API::Person do
       end
     end
     
+    describe "#get_person_followed_companies" do
+      context "without explicit fields" do
+        it "should request all the fields" do
+          @client.should_receive(:get_collection).with("people", "~", "following/companies", Bluebox::API::Person::FIELDS[:company], {})
+          @client.get_person_followed_companies("~")
+        end
+      end
+      
+      context "with explicit fields" do
+        it "should request only the requested fields" do
+          @client.should_receive(:get_collection).with("people", "~", "following/companies", ['id'], {})
+          @client.get_person_followed_companies('~', :fields => ['id'])
+        end
+      end
+    end
+    
+    describe "#get_person_suggested_companies" do
+      context "without explicit fields" do
+        it "should request all the fields" do
+          @client.should_receive(:get_collection).with("people", "~", "suggestions/to-follow/companies", Bluebox::API::Person::FIELDS[:company], {})
+          @client.get_person_suggested_companies("~")
+        end
+      end
+      
+      context "with explicit fields" do
+        it "should request only the requested fields" do
+          @client.should_receive(:get_collection).with("people", "~", "suggestions/to-follow/companies", ['id'], {})
+          @client.get_person_suggested_companies('~', :fields => ['id'])
+        end
+      end
+    end
+    
     describe "#get_people" do
       context "without explicit fields" do
         it "should request all the fields" do

@@ -15,7 +15,11 @@ module Bluebox
           'email-for-every-new-post'],
         :suggestion => ['id', 'name', 'short-description', 'description', 'relation-to-viewer', 'posts', 
           'counts-by-category', 'is-open-to-non-members', 'category', 'website-url', 'locale', 
-          'location', 'allow-member-invites', 'small-logo-url', 'large-logo-url', 'num-members']  
+          'location', 'allow-member-invites', 'small-logo-url', 'large-logo-url', 'num-members'],
+        :company => ['id', 'name', 'universal-name', 'email-domains', 'company-type', 'ticker', 
+          'website-url', 'industry', 'status', 'logo-url', 'square-logo-url', 'blog-rss-url', 
+          'twitter-id', 'employee-count-range', 'specialties', 'locations', 'description', 
+          'stock-exchange', 'founded-year', 'end-year', 'num-followers']
       }
 
       def get_me(options={})
@@ -40,6 +44,16 @@ module Bluebox
       def get_person_suggestions(id_or_params, options={})
         fields = fields_from_options(options, FIELDS[:suggestion])
         get_collection("people", id_or_params, "suggestions/groups", fields, options)
+      end
+      
+      def get_person_followed_companies(id_or_params, options={})
+        fields = fields_from_options(options, FIELDS[:company])
+        get_collection("people", id_or_params, "following/companies", fields, options)
+      end
+      
+      def get_person_suggested_companies(id_or_params, options={})
+        fields = fields_from_options(options, FIELDS[:company])
+        get_collection("people", id_or_params, "suggestions/to-follow/companies", fields, options)
       end
     
       # Batch lookups
