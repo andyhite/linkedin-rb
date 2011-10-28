@@ -40,5 +40,11 @@ module Bluebox
       fields = fields_from_options(options, FIELDS[:suggestion])
       get_collection("people", id_or_params, "suggestions/groups", fields, options)
     end
+    
+    # Batch lookups
+    def get_people(ids, options={})
+      fields = fields_from_options(options, FIELDS[:person])
+      get_objects("people", ids, fields, options)
+    end
   end
 end

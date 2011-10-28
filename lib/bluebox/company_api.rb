@@ -11,5 +11,11 @@ module Bluebox
       fields = fields_from_options(options, FIELDS[:company])
       get_object("companies", id_or_params, fields, options)
     end
+    
+    # Batch lookups
+    def get_companies(ids, options={})
+      fields = fields_from_options(options, FIELDS[:company])
+      get_objects("companies", ids, fields, options)
+    end
   end
 end

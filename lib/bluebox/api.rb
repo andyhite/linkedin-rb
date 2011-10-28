@@ -22,6 +22,10 @@ module Bluebox
       get("#{object}/#{query}", fields, options)
     end
     
+    def get_objects(object, ids, fields=[], options={})
+      get("#{object}::(#{ids.join(',')})", fields, options)['values']
+    end
+    
     def get_collection(object, id_or_param, collection, fields=[], options={})
       query = parse_query(id_or_param)
       get("#{object}/#{query}/#{collection}", fields, options)['values']

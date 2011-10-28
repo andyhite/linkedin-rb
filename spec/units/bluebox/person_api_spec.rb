@@ -81,5 +81,21 @@ describe Bluebox::PersonAPI do
         end
       end
     end
+    
+    describe "#get_people" do
+      context "without explicit fields" do
+        it "should request all the fields" do
+          @client.should_receive(:get_objects).with("people", ['1', '2', '3'], Bluebox::PersonAPI::FIELDS[:person], {})
+          @client.get_people(['1', '2', '3'])
+        end
+      end
+      
+      context "with explicit fields" do
+        it "should request only the requested fields" do
+          @client.should_receive(:get_objects).with("people", ['1', '2', '3'], ['id'], {})
+          @client.get_people(['1', '2', '3'], :fields => ['id'])
+        end
+      end
+    end
   end
 end

@@ -8,5 +8,11 @@ module Bluebox
       fields = fields_from_options(options, FIELDS[:comment])
       get_object("comments", id_or_params, fields, options)
     end
+    
+    # Batch lookups
+    def get_comments(ids, options={})
+      fields = fields_from_options(options, FIELDS[:comment])
+      get_objects("comments", ids, fields, options)
+    end
   end
 end

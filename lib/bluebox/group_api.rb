@@ -17,5 +17,11 @@ module Bluebox
       fields = fields_from_options(options, FIELDS[:post])
       get_collection("groups", id_or_params, "posts", fields, options)
     end
+    
+    # Batch lookups
+    def get_groups(ids, options={})
+      fields = fields_from_options(options, FIELDS[:group])
+      get_objects("groups", ids, fields, options)
+    end
   end
 end
