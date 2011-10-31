@@ -47,6 +47,7 @@ PLATFORMS
 
 DEPENDENCIES
   bluebox!
+  bundler (~> 1.0.15)
   rspec (~> 2.6)
   ruby-debug19
   vcr (~> 2.0.0.beta1)
