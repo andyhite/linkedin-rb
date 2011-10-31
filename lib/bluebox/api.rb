@@ -24,12 +24,12 @@ module Bluebox
     end
     
     def get_objects(object, ids, options={})
-      get("#{object}::(#{ids.join(',')})", options)['values']
+      get("#{object}::(#{ids.join(',')})", options)
     end
     
     def get_collection(object, id_or_param, collection, options={})
       query = parse_query(id_or_param)
-      get("#{object}/#{query}/#{collection}", options)['values']
+      get("#{object}/#{query}/#{collection}", options)
     end
     
   private

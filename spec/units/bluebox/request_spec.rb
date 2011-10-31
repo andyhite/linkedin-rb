@@ -1,12 +1,16 @@
 require_relative '../../spec_helper'
 
 describe Bluebox::Request do
+  before do
+    Bluebox.configure do |config|
+      config.consumer_key = "consumer-key"
+      config.consumer_secret = "consumer-secret"
+    end
+  end
+  
   describe "with an initialized client" do
     before do
-      @client = Bluebox::Client.new({
-        :oauth_token => "oauth-token",
-        :oauth_secret => "oauth-secret"
-      })
+      @client = Bluebox::Client.new("oauth-token", "oauth-secret")
       @access_token = mock('access token')
       @client.stub(:access_token) { @access_token }
     end
