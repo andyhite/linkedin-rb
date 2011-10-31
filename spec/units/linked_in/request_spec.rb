@@ -1,8 +1,8 @@
 require_relative '../../spec_helper'
 
-describe Bluebox::Request do
+describe LinkedIn::Request do
   before do
-    Bluebox.configure do |config|
+    LinkedIn.configure do |config|
       config.consumer_key = "consumer-key"
       config.consumer_secret = "consumer-secret"
     end
@@ -10,7 +10,7 @@ describe Bluebox::Request do
   
   describe "with an initialized client" do
     before do
-      @client = Bluebox::Client.new("oauth-token", "oauth-secret")
+      @client = LinkedIn::Client.new("oauth-token", "oauth-secret")
       @access_token = mock('access token')
       @client.stub(:access_token) { @access_token }
     end
@@ -29,7 +29,7 @@ describe Bluebox::Request do
       end
       
       it "should initialize a new response" do
-        Bluebox::Response.should_receive(:new).with(@response)
+        LinkedIn::Response.should_receive(:new).with(@response)
         @client.request(:get, "test/path")
       end
     end

@@ -1,4 +1,4 @@
-module Bluebox
+module LinkedIn
   module API
     module Comment
       def get_comment(id_or_params, options={})

@@ -1,4 +1,4 @@
-module Bluebox
+module LinkedIn
   module API
     module Post
       def get_post(id_or_params, options={})

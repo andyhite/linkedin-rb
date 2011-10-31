@@ -1,4 +1,4 @@
-module Bluebox
+module LinkedIn
   module API
     module Group
       def get_group(id_or_params, options={})

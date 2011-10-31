@@ -1,5 +1,5 @@
 require 'rspec'
-require 'bluebox'
+require 'linked_in'
 
 Dir[File.join(File.dirname(__FILE__), "support/**/*.rb")].each { |f| require f }
 

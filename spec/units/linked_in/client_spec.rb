@@ -1,9 +1,9 @@
 require_relative '../../spec_helper'
 
-describe Bluebox::Client do
+describe LinkedIn::Client do
   context "with configuration" do
     before do
-      Bluebox.configure do |config|
+      LinkedIn.configure do |config|
         config.consumer_key = "consumer-key"
         config.consumer_secret = "consumer-secret"
       end
@@ -11,7 +11,7 @@ describe Bluebox::Client do
     
     context "an initialized client" do
       before do
-        @client = Bluebox::Client.new("oauth-token", "oauth-secret")
+        @client = LinkedIn::Client.new("oauth-token", "oauth-secret")
       end
     
       it "sets the oauth token" do
@@ -45,7 +45,7 @@ describe Bluebox::Client do
   
   context "without configuration" do
     before do
-      Bluebox.configure do |config|
+      LinkedIn.configure do |config|
         config.consumer_key = nil
         config.consumer_secret = nil
       end
@@ -53,7 +53,7 @@ describe Bluebox::Client do
     
     it "should raise an error" do
       expect do
-        @client = Bluebox::Client.new("oauth-token", "oauth-secret")
+        @client = LinkedIn::Client.new("oauth-token", "oauth-secret")
       end.to raise_error
     end
   end

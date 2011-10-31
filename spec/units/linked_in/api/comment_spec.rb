@@ -1,8 +1,8 @@
 require_relative '../../../spec_helper'
 
-describe Bluebox::API::Comment do
+describe LinkedIn::API::Comment do
   before do
-    Bluebox.configure do |config|
+    LinkedIn.configure do |config|
       config.consumer_key = "consumer-key"
       config.consumer_secret = "consumer-secret"
     end
@@ -10,7 +10,7 @@ describe Bluebox::API::Comment do
   
   describe "with an initialized client" do
     before do
-      @client = Bluebox::Client.new("oauth-token", "oauth-secret")
+      @client = LinkedIn::Client.new("oauth-token", "oauth-secret")
       @response = double('response', :body => {}, :code => 200)
       @client.stub(:get).and_return(@response)
     end

@@ -1,4 +1,4 @@
-module Bluebox
+module LinkedIn
   module Configuration
     DEFAULT_OPTIONS = {
       :base_uri => 'http://api.linkedin.com/v1',

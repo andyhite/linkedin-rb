@@ -1,12 +1,12 @@
 $:.push File.expand_path("../lib", __FILE__)
 
 # Maintain your gem's version:
-require "bluebox/version"
+require "linked_in/version"
 
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
-  s.name        = "bluebox"
-  s.version     = Bluebox::VERSION
+  s.name        = "linkedin-rb"
+  s.version     = LinkedIn::VERSION
   s.authors     = ["Andrew Hite"]
   s.email       = ["andrew@andrew-hite.com"]
   s.homepage    = "http://andrew-hite.com"

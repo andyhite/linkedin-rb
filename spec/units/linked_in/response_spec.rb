@@ -1,7 +1,7 @@
 require 'json'
 require_relative '../../spec_helper'
 
-describe Bluebox::Response do
+describe LinkedIn::Response do
   describe "an initialized request" do
     before do
       @code = 200
@@ -9,7 +9,7 @@ describe Bluebox::Response do
       raw_response = mock('raw response')
       raw_response.stub(:code) { @code }
       raw_response.stub(:body) { @body }
-      @response = Bluebox::Response.new(raw_response)
+      @response = LinkedIn::Response.new(raw_response)
     end
     
     it "should set the code" do

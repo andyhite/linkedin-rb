@@ -1,10 +1,10 @@
-require 'bluebox/request'
-require 'bluebox/api'
+require 'linked_in/request'
+require 'linked_in/api'
 
-module Bluebox
+module LinkedIn
   class Client
-    include Bluebox::Request
-    include Bluebox::API
+    include LinkedIn::Request
+    include LinkedIn::API
     
     attr_accessor :oauth_token, :oauth_secret
     
@@ -28,15 +28,15 @@ module Bluebox
   private
     
     def consumer_key
-      @consumer_key ||= Bluebox.consumer_key
+      @consumer_key ||= LinkedIn.consumer_key
     end
     
     def consumer_secret
-      @consumer_secret ||= Bluebox.consumer_secret
+      @consumer_secret ||= LinkedIn.consumer_secret
     end
     
     def base_uri
-      @base_uri ||= Bluebox.base_uri
+      @base_uri ||= LinkedIn.base_uri
     end
   end
 end

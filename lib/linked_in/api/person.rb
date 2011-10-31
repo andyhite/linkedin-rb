@@ -1,4 +1,4 @@
-module Bluebox
+module LinkedIn
   module API
     module Person
       

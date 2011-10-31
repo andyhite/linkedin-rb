@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    bluebox (0.0.1)
+    linked_in-rb (0.0.1)
       activesupport (~> 3.1.0)
       oauth (~> 0.4.3)
 
@@ -46,8 +46,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bluebox!
   bundler (~> 1.0.15)
+  linked_in-rb!
   rspec (~> 2.6)
   ruby-debug19
   vcr (~> 2.0.0.beta1)

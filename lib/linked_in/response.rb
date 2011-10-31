@@ -1,4 +1,4 @@
-module Bluebox
+module LinkedIn
   class Response
     attr_accessor :code, :body
     

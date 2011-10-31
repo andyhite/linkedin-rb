@@ -1,16 +1,16 @@
-require 'bluebox/api/person'
-require 'bluebox/api/group'
-require 'bluebox/api/post'
-require 'bluebox/api/comment'
-require 'bluebox/api/company'
+require 'linked_in/api/person'
+require 'linked_in/api/group'
+require 'linked_in/api/post'
+require 'linked_in/api/comment'
+require 'linked_in/api/company'
 
-module Bluebox
+module LinkedIn
   module API
-    include Bluebox::API::Person
-    include Bluebox::API::Group
-    include Bluebox::API::Post
-    include Bluebox::API::Comment
-    include Bluebox::API::Company
+    include LinkedIn::API::Person
+    include LinkedIn::API::Group
+    include LinkedIn::API::Post
+    include LinkedIn::API::Comment
+    include LinkedIn::API::Company
     
     def get(path, options={})
       options = { :format => 'json', :fields => nil }.merge(options)
